@@ -1,0 +1,49 @@
+extends ./layout.jade
+
+block post-meta
+    include meta-detalle.jade
+
+block post-style
+    link(rel="stylesheet", href="/css/pelis-detalle.min.css")
+
+
+block contenido
+
+    div(id="caja-principal")
+
+        section(class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12")
+            
+            div(class="caja-peli")
+                h1(class="titulo-peli") #{ pelicula.titulo + " (" + pelicula.age + ")" }
+
+            div(class="row")
+
+                div(class="col-xl-5 col-lg-6 caja-portada-peli")
+                    //- img(class="portada-peli", src="/imagenes/films/#{ pelicula.foto }", alt="#{pelicula.titulo}")
+                    img(class="portada-peli",src="http://lorempixel.com/g/400/600", alt="#{pelicula.titulo}")
+
+                div(class="col-xl-7 col-lg-6 caja-datos")
+                    div
+                        p(style="text-align: justify;") #{ pelicula.descripcion}
+                        
+                        p 
+                            strong Audio: 
+                            &nbsp; #{pelicula.audio}
+                        
+                        p
+                            strong Calidad: 
+                            &nbsp; #{pelicula.calidad}
+                        
+                        p 
+                            strong Puntuación: 
+                            &nbsp; #{pelicula.puntuacion}
+                        
+                        p 
+                            strong Director: 
+                            &nbsp;#{pelicula.director}
+                        
+                        p(style="text-align: justify;")  
+                            strong Elenco: 
+                            &nbsp; #{pelicula.elenco}
+
+        include enlaces.jade
