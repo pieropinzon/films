@@ -1383,7 +1383,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/auth/auth.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"caja-auth\">\n    <h3 class=\"text-center\">Autenticación</h3>\n    <hr>\n    <div class=\"caja-login\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"login()\" >\n\t            <div class=\"form-group\">\n\t            \t<label for=\"username\">Usuario</label>\n\t            \t<input [(ngModel)]=\"user.username\" formControlName=\"username\" type=\"text\" class=\"form-control\">\n\n\t            \t<div *ngIf=\"form.controls['username'].touched && !form.controls['username'].valid\" class=\"alert alert-danger\">\n                    Nombre del Usuario es Obligatorio.\n                </div>\n\t            </div>\n\n              <div class=\"form-group\">\n\t            \t<label for=\"password\">Password</label>\n\t            \t<input [(ngModel)]=\"user.password\" formControlName=\"password\" type=\"text\" class=\"form-control\">\n\n\t            \t<div *ngIf=\"form.controls['password'].touched && !form.controls['password'].valid\" class=\"alert alert-danger\">\n                    La clave del usuario es Obligatoria.\n                </div>\n\t            </div>\n\n\t            <input type=\"submit\" class=\"btn btn-primary\" value=\"Iniciar Sesion\" [disabled]=\"!form.valid\" >\n\t\t\t</form>    \n    </div>\n</div>"
+module.exports = "<div id=\"caja-auth\">\n    <h3 class=\"text-center\">Autenticación</h3>\n    <hr>\n    <div class=\"caja-login\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"login()\" >\n\t            <div class=\"form-group\">\n\t            \t<label for=\"username\">Usuario</label>\n\t            \t<input [(ngModel)]=\"user.username\" formControlName=\"username\" type=\"text\" class=\"form-control\">\n\n\t            \t<div *ngIf=\"form.controls['username'].touched && !form.controls['username'].valid\" class=\"alert alert-danger\">\n                    Nombre del Usuario es Obligatorio.\n                </div>\n\t            </div>\n\n              <div class=\"form-group\">\n\t            \t<label for=\"password\">Password</label>\n\t            \t<input [(ngModel)]=\"user.password\" formControlName=\"password\" type=\"password\" class=\"form-control\">\n\n\t            \t<div *ngIf=\"form.controls['password'].touched && !form.controls['password'].valid\" class=\"alert alert-danger\">\n                    La clave del usuario es Obligatoria.\n                </div>\n\t            </div>\n\n\t            <input type=\"submit\" class=\"btn btn-primary\" value=\"Iniciar Sesion\" [disabled]=\"!form.valid\" >\n\t\t\t</form>    \n    </div>\n</div>"
 
 /***/ }),
 
@@ -1478,7 +1478,8 @@ var AuthService = (function () {
         this.http = http;
         this.router = router;
         this.url = ""; // url de los servicios en desarrollo
-        this.url = "//localhost:4000/api/user/";
+        //   this.url = "//localhost:4000/api/user/";
+        this.url = "//filmsplay.herokuapp.com/api/user/";
     }
     AuthService.prototype.login = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
