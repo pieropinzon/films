@@ -11,7 +11,7 @@ var router = express.Router();
 // muestra las peliculas del año
 router.get("/peliculas/fecha/:age",function (req,res) {
 
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(1)-1)*num_por_page,
 		num_page = parseInt(1),
@@ -26,7 +26,7 @@ router.get("/peliculas/fecha/:age",function (req,res) {
 // muestra las peliculas del año
 router.get("/peliculas/fecha/:age/page/:page",function (req,res) {
 
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(req.params.page)-1)*num_por_page,
 		num_page = parseInt(req.params.page),
@@ -41,7 +41,7 @@ router.get("/peliculas/fecha/:age/page/:page",function (req,res) {
 // muestra las peliculas del año
 router.get("/peliculas/genero/:genero",function (req,res) {
 	
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(1)-1)*num_por_page,
 		num_page = parseInt(1),
@@ -67,7 +67,7 @@ router.get("/peliculas/genero/:genero",function (req,res) {
 
 router.get("/peliculas/genero/:genero/page/:page",function (req,res) {
 	
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(req.params.page)-1)*num_por_page,
 		num_page = parseInt(req.params.page),
@@ -93,7 +93,7 @@ router.get("/peliculas/genero/:genero/page/:page",function (req,res) {
 
 router.get("/", function(req, res){
 
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(1)-1)*num_por_page,
 		num_page = parseInt(1),
@@ -143,7 +143,7 @@ router.get("/", function(req, res){
 
 router.get("/page/:page", function(req, res){
 
-	const num_por_page = 5;
+	const num_por_page = 12;
 
 	let page = (parseInt(req.params.page)-1)*num_por_page,
 		num_page = parseInt(req.params.page),
