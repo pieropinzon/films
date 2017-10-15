@@ -62,30 +62,28 @@ block contenido
                         
                         br
 
-                    div(class="col-xl-12 col-lg-12")
-                        h6 Estrenos
-                        hr
-                        div(class="caja-prox")    
-                            for pelis in peliculas
-                                //- img(class="img-foto-prox img-thumbnail", src="/imagenes/films/#{ pelis.foto }", alt="#{pelis.titulo}")
-                                img(class="img-foto-prox img-thumbnail", src="http://lorempixel.com/g/400/600", alt="#{pelis.titulo.substr(0,18) + ' (' + pelis.age + ') descargar peliculas gratis en HD ' + pelis.genero.nombre}")
+                    //- div(class="col-xl-12 col-lg-12")
+                    //-     h6 Estrenos
+                    //-     hr
+                    //-     div(class="caja-prox")    
+                    //-         for pelis in peliculas
+                    //-             //- img(class="img-foto-prox img-thumbnail", src="/imagenes/films/#{ pelis.foto }", alt="#{pelis.titulo}")
+                    //-             img(class="img-foto-prox img-thumbnail", src="http://lorempixel.com/g/400/600", alt="#{pelis.titulo.substr(0,18) + ' (' + pelis.age + ') descargar peliculas gratis en HD ' + pelis.genero.nombre}")
                     
-                        br
+                    //-     br
 
                     div(class="col-xl-12 col-lg-12")                                        
-                        h6 Siguenos
-                        hr
-                        div(class="caja-prox")   
-                            a(href="#") 
-                                img(class="", src="/imagenes/icons/ico-fb.png", alt="FilmsPlay descargar peliculas gratis en HD")
-                            a(href="#")
-                                img(class="", src="/imagenes/icons/icon-twt.png", alt="FilmsPlay descargar peliculas gratis en HD")
-                            a(href="#")
-                                img(class="", src="/imagenes/icons/icon-insta.jpg", alt="FilmsPlay descargar peliculas gratis en HD")                            
-                            a(href="#")
-                                img(class="", src="/imagenes/icons/icon-google.png", alt="FilmsPlay descargar peliculas gratis en HD")
-                            a(href="#")
-                                img(class="", src="/imagenes/icons/icon-youtube.png", alt="FilmsPlay descargar peliculas gratis en HD")                            
+                        h6 Facebook
+                        hr  
+
+                        include like-box-fb.jade
+
+                    div(class="col-xl-12 col-lg-12", style="margin-top:20px;")                                        
+                        h6 Twitter
+                        hr  
+
+                        a(class="twitter-timeline", href="https://twitter.com/filmsplay1?ref_src=twsrc%5Etfw", data-height="270") Tweets by filmsplay1 
+                            script(async src="//platform.twitter.com/widgets.js", charset="utf-8")
 
 
         include paginacion.jade
