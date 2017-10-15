@@ -34,11 +34,17 @@
     padding:15px; 
 }
 
-.text small{
+.text .genero{
     position: absolute;
     bottom: 15px;
+    left: 30px;
 }
 
+.puntuacion{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
 
 .caja-prox{
     /*flexbox*/

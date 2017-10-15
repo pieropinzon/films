@@ -23,6 +23,25 @@
     margin-bottom: 20px;
 }
 
+.caja-enlaces{
+    border: darkgrey solid;
+    border-style: dotted;
+    border-width: 2px;    
+    padding: 15px 0px 15px 0px;
+}
+
+.caja-slider{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.title-slider{
+    margin-top: 20px;
+    padding-left: 15px;
+}
+
 .img-enlace{
     width: 100px;
     height: 100px;

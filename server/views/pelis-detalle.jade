@@ -6,6 +6,23 @@ block post-meta
 block post-style
     link(rel="stylesheet", href="/css/pelis-detalle.min.css")
 
+block post-script
+    script(type='text/javascript').
+        var contR = parseInt('#{countRecomends}');
+
+        if(contR < 4){
+
+            $('#carousel-indicador').hide();
+
+            $('#carousel-example-generic').carousel({
+                interval: false
+            });
+        }else{
+            $('#carousel-example-generic').carousel({
+                interval: 6000
+            });
+        }
+
 
 block contenido
 
@@ -32,7 +49,7 @@ block contenido
                         
                         p
                             strong Calidad: 
-                            &nbsp; #{pelicula.calidad}
+                            &nbsp; #{pelicula.calidad + " / 5"}
                         
                         p 
                             strong Puntuación: 
@@ -47,3 +64,11 @@ block contenido
                             &nbsp; #{pelicula.elenco}
 
         include enlaces.jade
+
+        div(class="fb-like", data-href="http://filmsplay.herokuapp.com/films/#{pelicula.titulo}", data-layout="standard", data-action="like", data-size="small", data-show-faces="true", data-share="true", style="margin-top: 20px;")
+
+        include slider-recomends.jade
+
+        hr 
+
+        div(class="fb-comments", data-href="http://filmsplay.herokuapp.com/films/#{pelicula.titulo}", data-width="100%", data-numposts="100")

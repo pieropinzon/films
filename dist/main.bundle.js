@@ -97,9 +97,12 @@ AdminComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__form_p_form_p_component__ = __webpack_require__("../../../../../src/app/admin/form-p/form-p.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__form_g_form_g_component__ = __webpack_require__("../../../../../src/app/admin/form-g/form-g.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__massive_massive_component__ = __webpack_require__("../../../../../src/app/admin/massive/massive.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__generos_generos_service__ = __webpack_require__("../../../../../src/app/admin/generos/generos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__peliculas_peliculas_service__ = __webpack_require__("../../../../../src/app/admin/peliculas/peliculas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__auth_auth_guard_service__ = __webpack_require__("../../../../../src/app/auth/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pelis_prox_pelis_prox_component__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__form_pprox_form_pprox_component__ = __webpack_require__("../../../../../src/app/admin/form-pprox/form-pprox.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__generos_generos_service__ = __webpack_require__("../../../../../src/app/admin/generos/generos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__peliculas_peliculas_service__ = __webpack_require__("../../../../../src/app/admin/peliculas/peliculas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__auth_auth_guard_service__ = __webpack_require__("../../../../../src/app/auth/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pelis_prox_pelis_prox_service__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -121,7 +124,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 //servicios.
+
 
 
 
@@ -148,13 +154,16 @@ AdminModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_12__form_g_form_g_component__["a" /* FormGComponent */],
             __WEBPACK_IMPORTED_MODULE_13__massive_massive_component__["a" /* MassiveComponent */],
             __WEBPACK_IMPORTED_MODULE_9__peliculas_peliculas_component__["a" /* PeliculasComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__generos_generos_component__["a" /* GenerosComponent */]
+            __WEBPACK_IMPORTED_MODULE_10__generos_generos_component__["a" /* GenerosComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__pelis_prox_pelis_prox_component__["a" /* PelisProxComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__form_pprox_form_pprox_component__["a" /* FormPproxComponent */]
         ],
         providers: [
             // servicios usados en cualquiera de los componentes
-            __WEBPACK_IMPORTED_MODULE_14__generos_generos_service__["a" /* GenerosService */],
-            __WEBPACK_IMPORTED_MODULE_15__peliculas_peliculas_service__["a" /* PeliculasService */],
-            __WEBPACK_IMPORTED_MODULE_16__auth_auth_guard_service__["a" /* AuthGuardService */]
+            __WEBPACK_IMPORTED_MODULE_16__generos_generos_service__["a" /* GenerosService */],
+            __WEBPACK_IMPORTED_MODULE_17__peliculas_peliculas_service__["a" /* PeliculasService */],
+            __WEBPACK_IMPORTED_MODULE_18__auth_auth_guard_service__["a" /* AuthGuardService */],
+            __WEBPACK_IMPORTED_MODULE_19__pelis_prox_pelis_prox_service__["a" /* PelisProxService */]
         ]
     })
 ], AdminModule);
@@ -174,7 +183,11 @@ AdminModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__generos_generos_component__ = __webpack_require__("../../../../../src/app/admin/generos/generos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__form_p_form_p_component__ = __webpack_require__("../../../../../src/app/admin/form-p/form-p.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__form_g_form_g_component__ = __webpack_require__("../../../../../src/app/admin/form-g/form-g.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_auth_guard_service__ = __webpack_require__("../../../../../src/app/auth/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pelis_prox_pelis_prox_component__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__form_pprox_form_pprox_component__ = __webpack_require__("../../../../../src/app/admin/form-pprox/form-pprox.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__auth_auth_guard_service__ = __webpack_require__("../../../../../src/app/auth/auth-guard.service.ts");
+
+
 
 
 
@@ -196,8 +209,12 @@ var AdminRoutes = [
             { path: 'peliculas/:id', component: __WEBPACK_IMPORTED_MODULE_4__form_p_form_p_component__["a" /* FormPComponent */] },
             { path: 'peliculas_new', component: __WEBPACK_IMPORTED_MODULE_4__form_p_form_p_component__["a" /* FormPComponent */] },
             { path: 'peliculas_massive', component: __WEBPACK_IMPORTED_MODULE_2__massive_massive_component__["a" /* MassiveComponent */] },
+            // rutas peliculas por estrenar
+            { path: 'pelis_prox', component: __WEBPACK_IMPORTED_MODULE_6__pelis_prox_pelis_prox_component__["a" /* PelisProxComponent */] },
+            { path: 'pelis_prox/:id', component: __WEBPACK_IMPORTED_MODULE_7__form_pprox_form_pprox_component__["a" /* FormPproxComponent */] },
+            { path: 'pelis_prox_new', component: __WEBPACK_IMPORTED_MODULE_7__form_pprox_form_pprox_component__["a" /* FormPproxComponent */] }
         ],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_auth_guard_service__["a" /* AuthGuardService */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_8__auth_auth_guard_service__["a" /* AuthGuardService */]]
     }
 ];
 //# sourceMappingURL=admin.routes.js.map
@@ -507,6 +524,150 @@ FormPComponent = __decorate([
 
 var _a, _b, _c, _d, _e;
 //# sourceMappingURL=form-p.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/form-pprox/form-pprox.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".caja-form{\n    margin-top: 125px;\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/form-pprox/form-pprox.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<loading [visible]=\"pelisLoading\" [module]=\"pelisModule\"></loading>\n\n<div class=\"row d-flex justify-content-center caja-form\">\n\n\n    <div class=\"col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"save()\" enctype=\"multipart/form-data\">\n        \n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <span>Datos de la Pelicula</span>\n                </div>\n\n                <div class=\"card-block\">\n                    <div class=\"row\">\n\n                        <label for=\"name\">Nombre</label>\n                        <input [(ngModel)]=\"pelicula.nombre\" formControlName=\"nombre\" type=\"text\" class=\"form-control form-control-sm\" >  \n                        <div *ngIf=\"form.controls['nombre'].touched && !form.controls['nombre'].valid\" class=\"text-danger\">\n                            El Nombre es Obligatorio.\n                        </div>    \n\n                        <label for=\"portada\">Portada</label>\n                        <input [(ngModel)]=\"pelicula.portada\" formControlName=\"portada\" type=\"file\" (change)=\"fileChange($event)\" accept=\".png, .jpg, .jpeg\" class=\"form-control form-control-sm\">\n                        <div *ngIf=\"form.controls['portada'].touched && !form.controls['portada'].valid\" class=\"text-danger\">\n                            La Portada es Obligatoria.\n                        </div>\n\n\n                        <label for=\"is_public\">Publicar</label>\n                        <select class=\"custom-select form-control form-control-sm\" [(ngModel)]=\"pelicula.is_public\" formControlName=\"is_public\">\n                            <option *ngFor=\"let public of publicar\" [ngValue]=\"public.valor\">{{ public.msj }}</option>\n                        </select>\n                        <div *ngIf=\"form.controls['is_public'].touched && !form.controls['is_public'].valid\" class=\"text-danger\">\n                            Este campo es obligatorio.\n                        </div>                \n\n                    </div>\n\n                </div>\n                <div class=\"card-footer\">\n                    <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >\n                </div>\n            </div>\n        </form>         \n    </div>\n\n\n</div>\n  \n      <!--<div class=\"float-right margen-div-btn\">\n        <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >        \n      </div>-->\n\n      <!--<pre>form value: <br>{{form.value | json}}</pre>-->"
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/form-pprox/form-pprox.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormPproxComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pelis_prox_pelis_prox_service__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pelis_prox_pelis_prox__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var FormPproxComponent = (function () {
+    function FormPproxComponent(fb, router, routeParams, peliculaService) {
+        this.fb = fb;
+        this.router = router;
+        this.routeParams = routeParams;
+        this.peliculaService = peliculaService;
+        this.pelicula = new __WEBPACK_IMPORTED_MODULE_4__pelis_prox_pelis_prox__["a" /* PelisProx */]();
+        this.pelisModule = "";
+    }
+    FormPproxComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.publicar = [
+            {
+                'msj': 'SI',
+                'valor': true
+            },
+            {
+                'msj': 'NO',
+                'valor': false
+            }
+        ];
+        console.log(this.publicar);
+        // inicializo el formulario y declaro las validaciones a realizar
+        this.form = this.fb.group({
+            nombre: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* Validators */].required],
+            is_public: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* Validators */].required],
+            portada: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* Validators */].required]
+        });
+        // tomo la variable que se muestra en ruta de la vista
+        var id = this.routeParams
+            .snapshot
+            .params['id'];
+        // si no hay identificador, inicializar el array de enlaces
+        if (!id) {
+            return;
+        }
+        else {
+            this.pelisLoading = true;
+            this.pelisModule = "Cargando datos de la pelicula...";
+            this.peliculaService
+                .getPeliculasId(id)
+                .subscribe(function (pelicula) {
+                _this.pelicula = pelicula;
+            }, null, function () {
+                _this.pelisLoading = false;
+                _this.pelisModule = "";
+            });
+        }
+    };
+    // guarda los datos de la pelicula
+    FormPproxComponent.prototype.save = function () {
+        var _this = this;
+        // si existe la pelicula
+        if (this.pelicula._id) {
+            // envio los datos para actualizar la pelicula
+            this.peliculaService
+                .updatePelicula(this.pelicula._id, this.form.value, this.portada)
+                .subscribe(function (pelicula) {
+                console.log(pelicula);
+                _this.router.navigate(['admin/pelis_prox']);
+            });
+        }
+        else {
+            // agrego la pelicula
+            this.peliculaService
+                .addPelicula(this.form.value, this.portada)
+                .subscribe(function (x) {
+                // una vez sale todo bien redireccionamos a la vista principal
+                _this.router.navigate(['admin/pelis_prox']);
+            });
+        }
+        // console.log(this.form.value);
+    };
+    FormPproxComponent.prototype.fileChange = function (event) {
+        var fileList = event.target.files;
+        if (fileList.length > 0) {
+            this.portada = fileList[0];
+        }
+    };
+    return FormPproxComponent;
+}());
+FormPproxComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-form-pprox',
+        template: __webpack_require__("../../../../../src/app/admin/form-pprox/form-pprox.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/admin/form-pprox/form-pprox.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__pelis_prox_pelis_prox_service__["a" /* PelisProxService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__pelis_prox_pelis_prox_service__["a" /* PelisProxService */]) === "function" && _d || Object])
+], FormPproxComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=form-pprox.component.js.map
 
 /***/ }),
 
@@ -894,7 +1055,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/admin/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <nav class=\"navbar navbar-toggleable-md navbar-inverse bg-inverse\">\n        <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n        </button>\n        <a class=\"navbar-brand\" routerLink=\"/admin/peliculas\">Admin Films</a>\n\n        <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n            <ul class=\"navbar-nav mr-auto\">\n                <li class=\"nav-item active\">\n                    <a class=\"nav-link\" routerLink=\"/admin/peliculas\">Peliculas <span class=\"sr-only\">(current)</span></a>\n                </li>\n                <li class=\"nav-item active\">\n                    <a class=\"nav-link\" routerLink=\"/admin/generos\" >Generos <span class=\"sr-only\">(current)</span></a>\n                </li>\n            </ul>\n            <form class=\"form-inline my-2 my-lg-0\">\n                <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n            </form>\n\n            <div class=\"dropdown show\">\n                <a class=\"btn btn-secondary dropdown-toggle\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                    {{ username }}\n                </a>\n\n                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">\n                    <a class=\"dropdown-item\" (click)=\"auth.logout()\">Cerrar Sesion</a>\n                </div> \n            </div>\n        </div>\n    </nav>\n\n    <div id=\"page-wrapper\">\n        <router-outlet></router-outlet>        \n    </div>\n\n</div>"
+module.exports = "<div class=\"container\">\n    <nav class=\"navbar navbar-toggleable-md navbar-inverse bg-inverse\">\n        <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n        </button>\n        <a class=\"navbar-brand\" routerLink=\"/admin/peliculas\">Admin Films</a>\n\n        <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n            <ul class=\"navbar-nav mr-auto\">\n                <li class=\"nav-item active\">\n                    <a class=\"nav-link\" routerLink=\"/admin/peliculas\">Peliculas <span class=\"sr-only\">(current)</span></a>\n                </li>\n                <li class=\"nav-item active\">\n                    <a class=\"nav-link\" routerLink=\"/admin/generos\" >Generos <span class=\"sr-only\">(current)</span></a>\n                </li>\n                <li class=\"nav-item active\">\n                    <a class=\"nav-link\" routerLink=\"/admin/pelis_prox\" >Por Estrenar <span class=\"sr-only\">(current)</span></a>\n                </li>\n            </ul>\n            <form class=\"form-inline my-2 my-lg-0\">\n                <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n            </form>\n\n            <div class=\"dropdown show\">\n                <a class=\"btn btn-secondary dropdown-toggle\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                    {{ username }}\n                </a>\n\n                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">\n                    <a class=\"dropdown-item\" (click)=\"auth.logout()\">Cerrar Sesion</a>\n                </div> \n            </div>\n        </div>\n    </nav>\n\n    <div id=\"page-wrapper\">\n        <router-outlet></router-outlet>        \n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -1167,6 +1328,219 @@ var Peliculas = (function () {
 }());
 
 //# sourceMappingURL=peliculas.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/pelis-prox/pelis-prox.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "#caja-peli,\n#btn-add-peli,\n#display-peli{\n    margin-top:50px;\n}\n\n.clickable{\n    cursor: pointer;\n    color: #f44040;\n}\n\n.btn-update{\n    color: #68f58a;\n    text-decoration: none;\n}\n\n.margen-peli-inf{\n    margin-bottom: 25px;\n}\n\n.img-pelicula{\n    width: 100%;\n    height: 280px;\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/pelis-prox/pelis-prox.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"caja-peli\">\n\n\t<loading [visible]=\"pelisLoading\" [module]=\"pelisModule\"></loading>\n\n\t<h1>Peliculas por estrenar</h1>\n\n\t<p id=\"btn-add-peli\">\n\t\t<a routerLink=\"/admin/pelis_prox_new\" class=\"btn btn-primary\">Agregar Pelicula</a>\n\t\t<!--<a routerLink=\"/admin/peliculas_massive\" class=\"btn btn-success\">Registro masivo</a>-->\n\t</p>\n\n\t<div id=\"display-peli\" *ngIf=\"isPeliculas\">\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-lg-3 col-md-4 margen-peli-inf\" *ngFor=\"let pelicula of peliculas\">\n\t\t\t\t<div class=\"card\">\n\t\t\t\t\t<img class=\"card-img-top\" src=\"/imagenes/films-prox/{{pelicula.foto}}\" alt=\"...\" class=\"img-pelicula\">\n\t\t\t\t\t<div class=\"card-block\">\n\t\t\t\t\t\t<h5 class=\"card-title text-center\"> {{ pelicula.nombre.substr(0,23) }} </h5>\n\t\t\t\t\t\t<div class=\"card-text text-right\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['/admin/pelis_prox', pelicula._id]\" class=\"btn-update\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-pencil-square-o fa-lg\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<i (click)=\"deletePelicula(pelicula)\" class=\"fa fa-trash fa-lg clickable\"></i>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/pelis-prox/pelis-prox.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PelisProxComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pelis_prox_service__ = __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PelisProxComponent = (function () {
+    function PelisProxComponent(peliculaServ, router) {
+        this.peliculaServ = peliculaServ;
+        this.router = router;
+        this.pelisModule = "";
+    }
+    PelisProxComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.pelisLoading = true;
+        this.pelisModule = "Cargando CRUD de peliculas por estrenar...";
+        this.peliculaServ
+            .getPeliculas()
+            .subscribe(function (peliculas) {
+            _this.peliculas = peliculas,
+                _this.isPeliculas = _this.peliculas.length == 0 ? false : true;
+            _this.pelisLoading = false;
+            _this.pelisModule = "";
+        }, null, function () {
+            _this.pelisLoading = false;
+            _this.pelisModule = "";
+        });
+    };
+    PelisProxComponent.prototype.deletePelicula = function (pelicula) {
+        var _this = this;
+        if (confirm("Estas seguro de eliminar la pelicula " + pelicula.nombre + "?")) {
+            var index = this.peliculas.indexOf(pelicula);
+            this.peliculas.splice(index, 1);
+            this.pelisLoading = true;
+            this.pelisModule = "Eliminando Pelicula " + pelicula.nombre;
+            // apenas se elimine cargar los datos nuevamente
+            // aqui lo que hace es jugar con los datos de la tabla
+            this.peliculaServ
+                .deletePelicula(pelicula._id)
+                .subscribe(function (x) {
+                // respuesta del servidor
+                console.log(x);
+                // una vez sale todo bien redireccionamos a la vista principal
+                // location.reload();
+                _this.pelisLoading = false;
+                _this.pelisModule = "";
+            }, function (err) {
+                _this.peliculas
+                    .splice(index, 0, pelicula);
+                _this.pelisLoading = false;
+                _this.pelisModule = "";
+            });
+        }
+    };
+    return PelisProxComponent;
+}());
+PelisProxComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-pelis-prox',
+        template: __webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/admin/pelis-prox/pelis-prox.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__pelis_prox_service__["a" /* PelisProxService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__pelis_prox_service__["a" /* PelisProxService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object])
+], PelisProxComponent);
+
+var _a, _b;
+//# sourceMappingURL=pelis-prox.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/pelis-prox/pelis-prox.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PelisProxService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PelisProxService = (function () {
+    function PelisProxService(http) {
+        this.http = http;
+        // private url = "//localhost:4000/api/pelis-prox"; // url local
+        // private urlBase = "//localhost:4000/api";
+        this.url = "//filmsplay.herokuapp.com/api/pelis-prox"; // url de los servicios en produccion
+        this.urlBase = "//filmsplay.herokuapp.com/api";
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        if (localStorage.getItem('token')) {
+            this.headers.append('x-access-token', localStorage.getItem('token'));
+        }
+    }
+    PelisProxService.prototype.getPeliculas = function () {
+        return this.http
+            .get(this.url, { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.getPeliculasId = function (peliculaId) {
+        return this.http
+            .get(this.getPeliculaUrl(peliculaId), { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.addPelicula = function (pelicula, portada) {
+        var form_data = new FormData();
+        for (var key in pelicula) {
+            form_data.append(key, pelicula[key]);
+        }
+        form_data.append('portada', portada, portada.name);
+        return this.http
+            .post(this.url, form_data, { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.updatePelicula = function (id, pelicula, portada) {
+        var form_data = new FormData();
+        for (var key in pelicula) {
+            form_data.append(key, pelicula[key]);
+        }
+        form_data.append('portada', portada, portada.name);
+        return this.http
+            .put(this.getPeliculaUrl(id), form_data, { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.deletePelicula = function (peliculaId) {
+        return this.http.delete(this.getPeliculaUrl(peliculaId), { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.sendCsv = function (archivo) {
+        var form_data = new FormData();
+        form_data.append('archivo', archivo, archivo.name);
+        return this.http
+            .post(this.urlBase + "/csv/peliculas", form_data, { headers: this.headers })
+            .map(function (res) { return res.json(); });
+    };
+    PelisProxService.prototype.getPeliculaUrl = function (peliculaId) {
+        return this.url + "/" + peliculaId;
+    };
+    return PelisProxService;
+}());
+PelisProxService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], PelisProxService);
+
+var _a;
+//# sourceMappingURL=pelis-prox.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/admin/pelis-prox/pelis-prox.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PelisProx; });
+var PelisProx = (function () {
+    function PelisProx() {
+    }
+    return PelisProx;
+}());
+
+//# sourceMappingURL=pelis-prox.js.map
 
 /***/ }),
 

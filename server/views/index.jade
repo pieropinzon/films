@@ -42,7 +42,11 @@ block contenido
                                         h4(class="text-center") #{pelis.titulo + " (" + pelis.age + ")"}
                                         br
                                         p #{pelis.descripcion.substr(0,100) + "..."}
-                                        small #{pelis.genero.nombre}
+                                        small(class="genero") #{pelis.genero.nombre}
+                                        div(class="puntuacion")
+                                            small
+                                                - for (var i = 0; i < pelis.puntuacion; i++)
+                                                    span(class="fa fa-star fa-l")                                                                           
 
 
             aside(class="col-xl-3 col-lg-3")
@@ -51,9 +55,9 @@ block contenido
                         h6 Proximamente
                         hr        
                         div(class="caja-prox")    
-                            for pelis in peliculas
+                            for pelis in proxEstrenos
                                 //- img(class="img-foto-prox img-thumbnail", src="/imagenes/films/#{ pelis.foto }", alt="#{pelis.titulo}")
-                                img(class="img-foto-prox img-thumbnail", src="http://lorempixel.com/g/400/600", alt="#{pelis.titulo.substr(0,18) + ' (' + pelis.age + ') descargar peliculas gratis en HD ' + pelis.genero.nombre}")
+                                img(class="img-foto-prox img-thumbnail", src="http://lorempixel.com/g/400/600", alt="#{ pelis.nombre + ' descargar peliculas gratis en HD ' + pelis.is_public}")
                                 
                         
                         br

@@ -2,6 +2,7 @@ var express = require("express");
 
 const peliculasModels = require('../models/film');
 const generosModels = require('../models/genero');
+const pelisProxModels = require('../models/pelisProx');
 
 let peliculasClass = require('../clases/peliculas');
 
@@ -111,16 +112,23 @@ router.get("/", function(req, res){
 				sinResultados = 'No se han encontrado resultados para tu búsqueda: ' + req.query.search;
 			}
 
-			let context = {
+
+			pelisProxModels.find({ is_public: true }, function(err, peliculasProx){
+				if(err) console.log(err);
+
+				let context = {
 								peliculas : peliculas,
 								num_page : num_page,
 								count : count,
 								result: sinResultados,
-								title: "Peliculas de " + req.query.search +" para descargar gratis en HD"
+								title: "Peliculas de " + req.query.search +" para descargar gratis en HD",
+								proxEstrenos: peliculasProx
 						};
 
 
-			res.render("index",context);
+				res.render("index",context);
+			}).limit(8).sort({created: -1});
+
 		});
 
 	}else{
@@ -157,9 +165,20 @@ router.get("/films/:titulo", function(req, res){
 		.exec(function (err,pelicula) {
 			if (err) console.log(err);
 
-			res.render("pelis-detalle", {pelicula: pelicula, 
-										 title: pelicula.titulo + " (" + pelicula.age + ") descargar gratis en HD"
-				});
+
+			peliculasModels.find({ genero: pelicula.genero._id }, function(err, peliculasRecomds){
+				if(err) console.log(err);
+				
+				let context = {
+								pelicula : pelicula,
+								title: pelicula.titulo + " (" + pelicula.age + ") descargar gratis en HD",
+								pelisRecomends: peliculasRecomds,
+								countRecomends: parseInt(peliculasRecomds.length)
+						};
+
+
+				res.render("pelis-detalle",context);
+			}).limit(6);
 			
 		});
 		

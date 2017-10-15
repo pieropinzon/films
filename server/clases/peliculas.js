@@ -1,6 +1,8 @@
 const peliculasModels = require('../models/film');
 const generosModels = require('../models/genero');
 
+const pelisProxModels = require('../models/pelisProx');
+
 
 function sinResult(tipo, req){
 	let busqueda;
@@ -53,18 +55,25 @@ exports.obtenerPeliculas = function(res, req, tipo, dato, busqueda, page, num_pa
 				sinResultados = sinResult(tipo, req);
 			}
 
-			let context = {
+
+			pelisProxModels.find({ is_public: true }, function(err, peliculasProx){
+				if(err) console.log(err);
+
+				let context = {
 								peliculas : peliculas,
 								num_page : num_page,
 								count : count,
 								result: sinResultados,
 								url: tipo,
 								dato: dato,
-								title: title
+								title: title,
+								proxEstrenos: peliculasProx
 						};
 
 
-			res.render("index",context);
+				res.render("index",context);
+			}).limit(8).sort({created: -1});
+			
 		});
 
 }
