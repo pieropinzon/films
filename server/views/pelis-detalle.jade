@@ -65,7 +65,11 @@ block contenido
 
         include enlaces.jade
 
-        div(class="fb-like", data-href="http://filmsplay.herokuapp.com/films/#{pelicula.titulo}", data-layout="standard", data-action="like", data-size="small", data-show-faces="true", data-share="true", style="margin-top: 20px;")
+        hr
+
+        div(class="fb-like", data-href="http://filmsplay.herokuapp.com/films/#{pelicula.titulo}", data-layout="standard", data-action="like", data-size="small", data-show-faces="true", data-share="true")
+
+        hr
 
         include slider-recomends.jade
 
