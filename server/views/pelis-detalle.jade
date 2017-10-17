@@ -5,23 +5,25 @@ block post-meta
 
 block post-style
     link(rel="stylesheet", href="/css/pelis-detalle.min.css")
+    link(rel="stylesheet", href="/css/carousel.min.css")
 
 block post-script
+    script(src="/js/carousel.min.js")
     script(type='text/javascript').
         var contR = parseInt('#{countRecomends}');
 
-        if(contR < 4){
+        //- if(contR < 4){
 
-            $('#carousel-indicador').hide();
+        //-     $('#carousel-indicador').hide();
 
-            $('#carousel-example-generic').carousel({
-                interval: false
-            });
-        }else{
-            $('#carousel-example-generic').carousel({
-                interval: 6000
-            });
-        }
+        //-     $('#carousel-example-generic').carousel({
+        //-         interval: false
+        //-     });
+        //- }else{
+        //-     $('#carousel-example-generic').carousel({
+        //-         interval: 6000
+        //-     });
+        //- }
 
 
 block contenido
