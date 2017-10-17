@@ -40,10 +40,10 @@ div(class="caja-slider")
             each val, index in pelisRecomends
                 if index == 0
                     div(class="carousel-item col-md-3 active")
-                        img(class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text=#{index}" alt="#{'slide ' + index}")
+                        img(class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text=#{index+1}" alt="#{'slide ' + index}")
                 else
                     div(class="carousel-item col-md-3")
-                        img(class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text=#{index}" alt="#{'slide ' + index}")
+                        img(class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text=#{index+1}" alt="#{'slide ' + index}")
             
         a(class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev")
             i(class="fa fa-chevron-left fa-lg text-muted")
