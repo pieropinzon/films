@@ -30,15 +30,23 @@ router.route('/genero/:id')
     })
     .put(function(req,res){
         Generos.findById(req.params.id,function(err,genero){
-            if(err){
-                res.status(200).json("No existe el genero...");
+            if(!genero){
+                res.json({
+                    mensaje:"No existe el Genero que piensas actualizar...",
+                    tipo: "danger",
+                    visible: true
+                });
             }else{
                 var genero_update = genero;
 
                 genero_update.nombre  = typeof req.body.nombre == 'undefined' ? genero.nombre : req.body.nombre;
 
                 genero_update.save().then(function(us){
-                    res.status(200).json("Genero actualizado correctamente...");
+                    res.status(200).json({
+                        mensaje:"El genero ha sido actualizado exitosamente...",
+                        tipo: "success",
+                        visible: true
+                    });
                 },function(err){
                     res.status(200).json("Hubo un error al actualizar el Genero");
                 });
@@ -50,7 +58,11 @@ router.route('/genero/:id')
             if(error){
                 res.json('Error al intentar eliminar el genero.');
             }else{ 
-                res.json('Genero eliminado correctamente');
+                res.json({
+                    mensaje:"Hemos Eliminado los datos del genero...",
+                    tipo: "success",
+                    visible: true
+                });
             }
         });
     });
@@ -61,7 +73,18 @@ router.route('/genero')
             if (err) {
 				res.json(err); 
 			}else{
-                res.json(generos);
+                if(generos.length){
+                    console.log("si hay generos");
+                    res.json({generos: generos});                    
+                }else{
+                    console.log("no hay generos");
+                    res.json({
+                        mensaje:"No hay GENEROS registrados...",
+                        tipo: "danger",
+                        visible: true,
+                        generos: generos
+                    });                    
+                }
 			}
 			
 		});
@@ -72,7 +95,11 @@ router.route('/genero')
         });
 
         genero.save().then(function(us){
-            res.json("guardamos tus datos.");
+            res.json({
+                mensaje:"Hemos Registrado los datos del genero " + req.body.nombre + " exitosamente...",
+                tipo: "success",
+                visible: true
+            });
         },function(err){
             res.json(err);
         });

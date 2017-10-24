@@ -88,15 +88,23 @@ router.route('/peliculas/:id')
                     }
                 }
 
-                fs.rename(req.file.path,"public/imagenes/films/"+req.body.titulo+"."+extension,function (err) {
+                fs.rename(req.file.path,"public/imagenes/films/"+req.body.titulo+"."+extension, function (err) {
 					if (err) return console.error(err);
 					console.log("Imagen enviada a la carpeta de imagenes!");
 				});
                 
                 pelicula_update.save().then(function(us){
-                    res.status(200).json("Pelicula actualizada correctamente...");
+                    res.status(200).json({
+                        mensaje:"Hemos actualizado los datos de la película " + req.body.titulo + " exitosamente...",
+                        tipo: "success",
+                        visible: true
+                    });
                 },function(err){
-                    res.status(200).json("Hubo un error al actualizar los datos de la pelicula");
+                    res.status(200).json({
+                        mensaje: "Hubo un error al tratar de actualizar los datos de la pelicula " + req.body.titulo,
+                        tipo: "danger",
+                        visible: true
+                    });
                 });
             }
         });
@@ -118,9 +126,17 @@ router.route('/peliculas/:id')
 
                 pelicula_delete.remove().then(function(us){
                     fs.unlink("public/imagenes/films/" + pelicula.foto);                    
-                    res.status(200).json("Pelicula eliminada correctamente...");
+                    res.status(200).json({
+                        mensaje:"Hemos eliminado los datos de la película " + pelicula.titulo + " exitosamente",
+                        tipo: "success",
+                        visible: true
+                    });
                 },function(err){
-                    res.status(200).json("Hubo un error al eliminar los datos de la pelicula");
+                    res.status(200).json({
+                        mensaje:"Hubo un error al eliminar los datos de la pelicula " + pelicula.titulo,
+                        tipo: "danger",
+                        visible: true
+                    });
                 });                
 
             }
@@ -134,9 +150,18 @@ router.route('/peliculas')
 		.populate("enlace")
 		.exec(function (err,films) {
 			if (err) {
-				res.json(err); 
+				res.json({
+                        mensaje:"Hubo un error al cargar las películas...",
+                        tipo: "danger",
+                        visible: true
+                    }); 
 			}else{
-                res.status(200).json(films);
+                res.status(200).json({
+                        mensaje:"Películas cargadas exitosamente...",
+                        tipo: "success",
+                        visible: true,
+                        films: films
+                    });
 			}
 		});
     })
@@ -148,7 +173,7 @@ router.route('/peliculas')
         // console.log(req.file);
         // console.log(req.file.path);
        
-        console.log(req.body.genero);
+        // console.log(req.body.genero);
 
         var film = new Peliculas({
             titulo: req.body.titulo,
@@ -183,11 +208,19 @@ router.route('/peliculas')
 			if (!err) {
 				fs.rename(req.file.path,"public/imagenes/films/"+req.body.titulo+"."+extension,function (err) {
 					if (err) return console.error(err);
-					console.log("Succes!");
-					res.status(200).json("guardamos tus datos.");
+					// console.log("Succes!");
+					res.status(200).json({
+                        mensaje:"Hemos Registrado los datos de la película " + req.body.titulo + " exitosamente",
+                        tipo: "success",
+                        visible: true
+                    });
 				});
 			}else{
-				res.status(200).json("Hubo un error al guardar los datos de la pelicula");
+				res.status(200).json({
+                    mensaje: "Hubo un error al guardar los datos de la pelicula " + req.body.titulo,
+                    tipo: "danger",
+                    visible: true
+                });
 			}
 		});
     });

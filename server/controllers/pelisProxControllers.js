@@ -29,8 +29,12 @@ router.route('/pelis-prox/:id')
     })
     .put(upload.single('portada'), function(req,res){
         Peliculas.findById(req.params.id,function(err,peli){
-            if(err){
-                res.status(200).json("No existe la pelicula...");
+            if(!peli){
+                res.status(200).json({
+                    mensaje:"No existe la película que piensas actualizar...",
+                    tipo: "danger",
+                    visible: true
+                });
             }else{
                 var peli_update = peli;
                 var extension = req.file.originalname.split(".").pop();
@@ -60,7 +64,11 @@ router.route('/pelis-prox/:id')
 				});
 
                 peli_update.save().then(function(us){
-                    res.status(200).json("Pelicula actualizada correctamente...");
+                    res.status(200).json({
+                        mensaje:"La película " + peli.nombre + " ha sido actualizada exitosamente...",
+                        tipo: "success",
+                        visible: true
+                    });
                 },function(err){
                     res.status(200).json("Hubo un error al actualizar los datos de la pelicula");
                 });
@@ -69,8 +77,12 @@ router.route('/pelis-prox/:id')
     })
     .delete(function(req,res){
         Peliculas.findById(req.params.id,function(err,pelicula){
-            if(err){
-                res.status(200).json("No existe la pelicula");
+            if(!pelicula){
+                res.status(200).json({
+                    mensaje:"No existe la película que piensas eliminar...",
+                    tipo: "danger",
+                    visible: true
+                });
             }else{
                 var pelicula_delete = pelicula;
 
@@ -91,9 +103,13 @@ router.route('/pelis-prox/:id')
                         console.log('La imagen no existe...');
                     }
                     
-                    res.status(200).json("Pelicula eliminada correctamente...");  
+                    res.status(200).json({
+                        mensaje:"Han sido eliminado los datos de la película " + pelicula.nombre + " exitosamente...",
+                        tipo: "success",
+                        visible: true
+                    });  
                 },function(err){
-                    res.status(200).json("Hubo un error al eliminar los datos de la pelicula");
+                    res.status(200).json("Hubo un error al eliminar los datos de la película");
                 });                
 
             }
@@ -106,7 +122,18 @@ router.route('/pelis-prox')
             if (err) {
 				res.json(err); 
 			}else{
-                res.json(pelis);
+                if(pelis.length){   
+                    console.log("si hay pelis");
+                    res.json({pelis: pelis});                 
+                }else{
+                    console.log("no hay pelis");
+                    res.json({
+                        mensaje:"No hay películas registradas...",
+                        tipo: "danger",
+                        visible: true,
+                        pelis: pelis
+                    });
+                }
 			}
 			
 		});
@@ -124,7 +151,11 @@ router.route('/pelis-prox')
             fs.rename(req.file.path,"public/imagenes/films-prox/" + req.body.nombre + "." + extension,function (err) {
                 if (err) return console.error(err);
                 console.log("Succes!");
-                res.status(200).json("guardamos tus datos.");
+                res.status(200).json({
+                    mensaje:"Hemos Registrado los datos de la pelicula " + req.body.nombre + " exitosamente...",
+                    tipo: "success",
+                    visible: true
+                });
             });
         },function(err){
             res.json(err);

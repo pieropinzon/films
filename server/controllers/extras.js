@@ -32,8 +32,6 @@ router.route('/csv/peliculas')
             fs.createReadStream('public/archivos/'+ req.file.originalname)
             .pipe(csv())
             .on('data', function(data){
-                
-                console.log(data[3]);
 
                 Generos.findOne({nombre: data[3]},function(err,genero){
                     if(err){
@@ -53,23 +51,20 @@ router.route('/csv/peliculas')
                             foto: 'films 450.png'
                         });
 
-                        film.save(function (err) {
-                            if (!err) {
-                                console.log("pelicula guardada exitosamente...")
-                            }else{
-                                res.status(200).json("Hubo un error al guardar los datos de la pelicula");
-                            }
-                        });
+                        film.save(function (err) {});
                         
                     }
                 });          
             })
             .on('end', function(data){
                 
-                console.log('lectura finalizada');
                 fs.unlink("public/archivos/" + req.file.originalname);  
 
-                res.status(200).json("guardamos tus datos exitosamente.");
+                res.status(200).json({
+                    mensaje:"Archivo procesado exitosamente...",
+                    tipo: "success",
+                    visible: true
+                });
             });
 
         })
