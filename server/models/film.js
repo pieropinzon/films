@@ -8,7 +8,10 @@ mongoose.connect("mongodb://pieropinzon:paulperozo18@ds159013.mlab.com:59013/fil
 
 var film_schema = new Schema({
     titulo:{type:String,required: "EL titulo de la pelicula es Obligatorio"},        
-    age:{type:Number, min:[1990,"El año de la pelicula no puede ser menor que 1990."]},
+    age:{
+        type:Number, 
+        min:[1990,"El año de la pelicula no puede ser menor que 1990."]
+    },
     descripcion:{type:String,required: "La descripcion de la pelicula es Obligatoria"},
     audio:{type:String,required: "EL tipo de audio de la pelicula es Obligatoria"},    
     calidad:{type:String,required: "La calidad de la pelicula es Obligatoria"},        
@@ -17,7 +20,13 @@ var film_schema = new Schema({
     elenco:{type:String,required: "Debe ingresar el Elenco de la pelicula"},
     foto:{type:String,required: "Debe la imagen de portadade la pelicula"}, 
     genero:{type: Schema.Types.ObjectId, ref: "Genero"},
-    enlace:[{type: Schema.Types.ObjectId, ref: "Enlace"}]      
+    enlace:[{type: Schema.Types.ObjectId, ref: "Enlace"}],
+    is_public:{type: Boolean, default: false},
+    slug:{type:String},
+    created:{
+        type: Date,
+        default: Date.now
+    }      
 });
 
 var Film = mongoose.model("Film",film_schema);

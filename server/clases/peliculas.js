@@ -22,13 +22,13 @@ exports.tipoBusqueda = function(tipo, dato){
 	let busqueda;
 
 	if(tipo == ""){
-		busqueda = {};
+		busqueda = {is_public: true};
 	}else{
 		if(tipo == "age"){
-			busqueda = {age: dato};
+			busqueda = {age: dato, is_public: true};
 		}else{
 			if(tipo == "genero"){
-				busqueda = {genero: dato};
+				busqueda = {genero: dato, is_public: true};
 			}
 		}
 	}
@@ -48,6 +48,7 @@ exports.obtenerPeliculas = function(res, req, tipo, dato, busqueda, page, num_pa
 		.populate("genero")
 		.skip(page)
 		.limit(num_por_page)
+		.sort({created: -1})
 		.exec(function (err,peliculas) {
 			if (err) console.log(err);
 
@@ -55,11 +56,13 @@ exports.obtenerPeliculas = function(res, req, tipo, dato, busqueda, page, num_pa
 				sinResultados = sinResult(tipo, req);
 			}
 
-
 			pelisProxModels.find({ is_public: true }, function(err, peliculasProx){
 				if(err) console.log(err);
 
-				let context = {
+				generosModels.find({}, function(err, generos){
+					if(err) console.log(err);
+					
+					let context = {
 								peliculas : peliculas,
 								num_page : num_page,
 								count : count,
@@ -67,11 +70,13 @@ exports.obtenerPeliculas = function(res, req, tipo, dato, busqueda, page, num_pa
 								url: tipo,
 								dato: dato,
 								title: title,
-								proxEstrenos: peliculasProx
+								proxEstrenos: peliculasProx,
+								generos: generos
 						};
 
 
-				res.render("index",context);
+					res.render("index",context);
+				}).sort({nombre: 1});
 			}).limit(8).sort({created: -1});
 			
 		});

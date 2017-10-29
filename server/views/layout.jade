@@ -1,3 +1,4 @@
+doctype html
 html(lang="es")
 	head
 		title #{title}
@@ -57,22 +58,11 @@ html(lang="es")
 
 					div(class="collapse navbar-collapse", id="navbarSupportedContent")
 						ul(class="navbar-nav mr-auto")
-							li(class="nav-item active")
-								a(class="nav-link", href="/") Peliculas 
-									span(class="sr-only")(current)
 							li(class="nav-item btn-group")
 								a(class="dropdown-toggle nav-link", id="categoriaDrop", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Categorias
 								div(class="dropdown-menu", aria-labelledby="categoriaDrop")
-									a(class="dropdown-item" href="/peliculas/genero/Comedia") Comedia
-									a(class="dropdown-item" href="/peliculas/genero/Suspenso") Suspenso
-									a(class="dropdown-item" href="/peliculas/genero/Drama") Drama																		
-									a(class="dropdown-item" href="/peliculas/genero/Acción") Acción																		
-									a(class="dropdown-item" href="/peliculas/genero/Aventura") Aventura																		
-									a(class="dropdown-item" href="/peliculas/genero/Romance") Romance																		
-									a(class="dropdown-item" href="/peliculas/genero/Fantasía") Fantasía																		
-									a(class="dropdown-item" href="/peliculas/genero/Infantil") Infantil																		
-									a(class="dropdown-item" href="/peliculas/genero/Ciencia Ficción") Ciencia Ficción																		
-									a(class="dropdown-item" href="/peliculas/genero/Terror") Terror																		
+									for genero in generos
+										a(class="dropdown-item" href="/peliculas/genero/#{ genero.slug}") #{ genero.nombre }
 
 							li(class="nav-item btn-group")
 								a(class="dropdown-toggle nav-link", id="estrenoDrop", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Estrenos

@@ -48,7 +48,7 @@ router.get("/peliculas/genero/:genero",function (req,res) {
 		sinResultados = '',
 		count;
 
-	generosModels.findOne({nombre: req.params.genero}, function(err, genero){
+	generosModels.findOne({slug: req.params.genero}, function(err, genero){
 		if (err) console.log(err);
 
 		if(genero){
@@ -74,7 +74,7 @@ router.get("/peliculas/genero/:genero/page/:page",function (req,res) {
 		sinResultados = '',
 		count;
 
-	generosModels.findOne({nombre: req.params.genero}, function(err, genero){
+	generosModels.findOne({slug: req.params.genero}, function(err, genero){
 		if (err) console.log(err);
 
 		if(genero){
@@ -103,7 +103,7 @@ router.get("/", function(req, res){
 	if(req.query.search){
 		const regex = new RegExp(peliculasClass.expresionBuscador(req.query.search),'gi');
 
-		peliculasModels.find({titulo: regex})
+		peliculasModels.find({titulo: regex, is_public: true})
 		.populate("genero")
 		.exec(function (err,peliculas) {
 			if (err) console.log(err);
@@ -112,24 +112,27 @@ router.get("/", function(req, res){
 				sinResultados = 'No se han encontrado resultados para tu búsqueda: ' + req.query.search;
 			}
 
-
 			pelisProxModels.find({ is_public: true }, function(err, peliculasProx){
 				if(err) console.log(err);
+				
+				generosModels.find({}, function(err, generos){
+					if(err) console.log(err);
 
-				let context = {
+					let context = {
 								peliculas : peliculas,
 								num_page : num_page,
 								count : count,
 								result: sinResultados,
 								title: "Peliculas de " + req.query.search +" para descargar gratis en HD",
-								proxEstrenos: peliculasProx
+								proxEstrenos: peliculasProx,
+								generos: generos
 						};
 
-
-				res.render("index",context);
+					res.render("index",context);
+				}).sort({nombre: 1});
 			}).limit(8).sort({created: -1});
 
-		});
+		}).sort({created: -1});
 
 	}else{
 
@@ -159,25 +162,28 @@ router.get("/page/:page", function(req, res){
 router.get("/films/:titulo", function(req, res){
 	
 	peliculasModels
-		.findOne({titulo: req.params.titulo})
+		.findOne({slug: req.params.titulo, is_public: true})
 		.populate("genero")
 		.populate("enlace")
 		.exec(function (err,pelicula) {
 			if (err) console.log(err);
 
-
-			peliculasModels.find({ genero: pelicula.genero._id }, function(err, peliculasRecomds){
+			peliculasModels.find({ genero: pelicula.genero._id, is_public: true, _id: { $ne: pelicula._id } }, function(err, peliculasRecomds){
 				if(err) console.log(err);
-				
-				let context = {
-								pelicula : pelicula,
-								title: pelicula.titulo + " (" + pelicula.age + ") descargar gratis en HD",
-								pelisRecomends: peliculasRecomds,
-								countRecomends: parseInt(peliculasRecomds.length)
-						};
 
+				generosModels.find({}, function(err, generos){
+					if(err) console.log(err);
 
-				res.render("pelis-detalle",context);
+					let context = {
+						pelicula : pelicula,
+						title: pelicula.titulo + " (" + pelicula.age + ") descargar gratis en HD",
+						pelisRecomends: peliculasRecomds,
+						countRecomends: parseInt(peliculasRecomds.length),
+						generos: generos
+					};
+
+					res.render("pelis-detalle",context);
+				}).sort({nombre: 1});			
 			}).limit(6);
 			
 		});

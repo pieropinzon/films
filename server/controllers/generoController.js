@@ -1,12 +1,15 @@
-var express = require('express');
-var Generos = require("../models/genero");
-var Peliculas = require("../models/film");
+let express = require('express');
+let Generos = require("../models/genero");
+let Peliculas = require("../models/film");
+
+//utilities
+let utilities = require('../clases/utilities');
 
 // Middlewares
 const token = require('../middlewares/token');
 
 
-var router = express.Router();
+let router = express.Router();
 
 // debe de estar loggueado para poder consumir los servicios
 router.use(token);
@@ -40,6 +43,7 @@ router.route('/genero/:id')
                 var genero_update = genero;
 
                 genero_update.nombre  = typeof req.body.nombre == 'undefined' ? genero.nombre : req.body.nombre;
+                genero_update.slug  = utilities.convertToSlug(req.body.nombre);                
 
                 genero_update.save().then(function(us){
                     res.status(200).json({
@@ -54,15 +58,42 @@ router.route('/genero/:id')
         });
     })
     .delete(function(req,res){
-        Generos.remove({_id: req.params.id}, function(error){
-            if(error){
-                res.json('Error al intentar eliminar el genero.');
-            }else{ 
-                res.json({
-                    mensaje:"Hemos Eliminado los datos del genero...",
-                    tipo: "success",
+        Generos.findById(req.params.id,function(err,genero){
+            if(err){
+                res.status(500).json({
+                    mensaje:"Ups, ha ocurrido un error en el servidor...",
+                    tipo: "danger",
                     visible: true
                 });
+            }
+            
+            if(!genero){
+                res.status(404).json({
+                    mensaje:"No existe el Genero que desea eliminar...",
+                    tipo: "danger",
+                    visible: true
+                });
+            }else{
+
+                Peliculas.remove({genero: genero._id}, function (err) {
+                    if (err) console.log(err);
+                });               
+
+               Generos.remove({_id: req.params.id}, function(error){
+                    if(error){
+                        res.status(500).json({
+                            mensaje:"Ups, ha ocurrido un error en el servidor...",
+                            tipo: "danger",
+                            visible: true
+                        });
+                    }else{ 
+                        res.status(200).json({
+                            mensaje:"Hemos Eliminado los datos del genero...",
+                            tipo: "success",
+                            visible: true
+                        });
+                   }
+               });
             }
         });
     });
@@ -91,7 +122,8 @@ router.route('/genero')
     })
     .post(function(req,res){
         var genero = new Generos({
-            nombre: req.body.nombre
+            nombre: req.body.nombre,
+            slug: utilities.convertToSlug(req.body.nombre)
         });
 
         genero.save().then(function(us){
