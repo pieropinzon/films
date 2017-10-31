@@ -612,7 +612,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".caja-form{\n    margin-top: 125px;\n}", ""]);
+exports.push([module.i, ".caja-form{\n    margin-top: 125px;\n}\n\n/*switch*/\n\n.form-switch{\n    padding: 0;\n    border: none;\n}", ""]);
 
 // exports
 
@@ -625,7 +625,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/admin/form-pprox/form-pprox.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<loading [visible]=\"pelisLoading\" [module]=\"pelisModule\"></loading>\n\n<div class=\"row d-flex justify-content-center caja-form\">\n\n\n    <div class=\"col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"save()\" enctype=\"multipart/form-data\">\n        \n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <span>Datos de la Pelicula</span>\n                </div>\n\n                <div class=\"card-block\">\n                    <div class=\"row\">\n\n                        <label for=\"name\">Nombre</label>\n                        <input [(ngModel)]=\"pelicula.nombre\" formControlName=\"nombre\" type=\"text\" class=\"form-control form-control-sm\" >  \n                        <div *ngIf=\"form.controls['nombre'].touched && !form.controls['nombre'].valid\" class=\"text-danger\">\n                            El Nombre es Obligatorio.\n                        </div>    \n\n                        <label for=\"portada\">Portada</label>\n                        <input [(ngModel)]=\"pelicula.portada\" formControlName=\"portada\" type=\"file\" (change)=\"fileChange($event)\" accept=\".png, .jpg, .jpeg\" class=\"form-control form-control-sm\">\n                        <div *ngIf=\"form.controls['portada'].touched && !form.controls['portada'].valid\" class=\"text-danger\">\n                            La Portada es Obligatoria.\n                        </div>\n\n\n                        <label for=\"is_public\">Publicar</label>\n                        <select class=\"custom-select form-control form-control-sm\" [(ngModel)]=\"pelicula.is_public\" formControlName=\"is_public\">\n                            <option *ngFor=\"let public of publicar\" [ngValue]=\"public.valor\">{{ public.msj }}</option>\n                        </select>\n                        <div *ngIf=\"form.controls['is_public'].touched && !form.controls['is_public'].valid\" class=\"text-danger\">\n                            Este campo es obligatorio.\n                        </div>                \n\n                    </div>\n\n                </div>\n                <div class=\"card-footer\">\n                    <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >\n                </div>\n            </div>\n        </form>         \n    </div>\n\n\n</div>\n  \n      <!--<div class=\"float-right margen-div-btn\">\n        <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >        \n      </div>-->\n\n      <!--<pre>form value: <br>{{form.value | json}}</pre>-->"
+module.exports = "<loading [visible]=\"pelisLoading\" [module]=\"pelisModule\"></loading>\n\n<div class=\"row d-flex justify-content-center caja-form\">\n\n\n    <div class=\"col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"save()\" enctype=\"multipart/form-data\">\n        \n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <span>Datos de la Pelicula</span>\n                </div>\n\n                <div class=\"card-block\">\n                    <div class=\"row\">\n\n                        <label for=\"name\">Mostrar Pelicula por Estrenar</label>\n                        <ui-switch [(ngModel)]=\"pelicula.is_public\" formControlName=\"is_public\" [checked]=\"false\" class=\"form-control form-switch\"></ui-switch>\n\n                        <label for=\"name\">Nombre</label>\n                        <input [(ngModel)]=\"pelicula.nombre\" formControlName=\"nombre\" type=\"text\" class=\"form-control form-control-sm\" >  \n                        <div *ngIf=\"form.controls['nombre'].touched && !form.controls['nombre'].valid\" class=\"text-danger\">\n                            El Nombre es Obligatorio.\n                        </div>    \n\n                        <label for=\"portada\">Portada</label>\n                        <input type=\"file\" (change)=\"fileChange($event)\" accept=\".png, .jpg, .jpeg\" class=\"form-control form-control-sm\">             \n\n                    </div>\n\n                </div>\n                <div class=\"card-footer\">\n                    <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >\n                </div>\n            </div>\n        </form>         \n    </div>\n\n\n</div>\n  \n      <!--<div class=\"float-right margen-div-btn\">\n        <input type=\"submit\" class=\"btn btn-primary btn-block\" value=\"Registrar\" [disabled]=\"!form.valid\" >        \n      </div>-->\n\n      <!--<pre>form value: <br>{{form.value | json}}</pre>-->"
 
 /***/ }),
 
@@ -663,23 +663,11 @@ var FormPproxComponent = (function () {
         this.pelisModule = "";
     }
     FormPproxComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.publicar = [
-            {
-                'msj': 'SI',
-                'valor': true
-            },
-            {
-                'msj': 'NO',
-                'valor': false
-            }
-        ];
-        console.log(this.publicar);
         // inicializo el formulario y declaro las validaciones a realizar
+        var _this = this;
         this.form = this.fb.group({
             nombre: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            is_public: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            portada: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
+            is_public: ['']
         });
         // tomo la variable que se muestra en ruta de la vista
         var id = this.routeParams
@@ -705,6 +693,8 @@ var FormPproxComponent = (function () {
     // guarda los datos de la pelicula
     FormPproxComponent.prototype.save = function () {
         var _this = this;
+        if (this.portada == undefined)
+            this.portada = false;
         // si existe la pelicula
         if (this.pelicula._id) {
             // envio los datos para actualizar la pelicula
@@ -723,6 +713,8 @@ var FormPproxComponent = (function () {
             });
         }
         else {
+            if (this.form.controls['is_public'].value == undefined)
+                this.form.controls['is_public'].setValue(false);
             // agrego la pelicula
             this.peliculaService
                 .addPelicula(this.form.value, this.portada)
@@ -1665,7 +1657,8 @@ var PelisProxService = (function () {
         for (var key in pelicula) {
             form_data.append(key, pelicula[key]);
         }
-        form_data.append('portada', portada, portada.name);
+        if (portada)
+            form_data.append('portada', portada, portada.name);
         return this.http
             .post(this.url, form_data, { headers: this.headers })
             .map(function (res) { return res.json(); });
@@ -1675,7 +1668,8 @@ var PelisProxService = (function () {
         for (var key in pelicula) {
             form_data.append(key, pelicula[key]);
         }
-        form_data.append('portada', portada, portada.name);
+        if (portada)
+            form_data.append('portada', portada, portada.name);
         return this.http
             .put(this.getPeliculaUrl(id), form_data, { headers: this.headers })
             .map(function (res) { return res.json(); });

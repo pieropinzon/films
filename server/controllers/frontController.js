@@ -159,7 +159,7 @@ router.get("/page/:page", function(req, res){
 });
 
 
-router.get("/films/:titulo", function(req, res){
+router.get("/peliculas/:titulo", function(req, res){
 	
 	peliculasModels
 		.findOne({slug: req.params.titulo, is_public: true})

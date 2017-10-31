@@ -1,6 +1,8 @@
 var express = require('express');
 var Peliculas = require("../models/pelisProx");
 
+let utilities = require('../clases/utilities');
+
 var multer = require('multer');
 var path = require('path');
 
@@ -30,55 +32,69 @@ router.route('/pelis-prox/:id')
     .put(upload.single('portada'), function(req,res){
         Peliculas.findById(req.params.id,function(err,peli){
             if(!peli){
-                res.status(200).json({
+                res.status(404).json({
                     mensaje:"No existe la película que piensas actualizar...",
                     tipo: "danger",
                     visible: true
                 });
             }else{
                 var peli_update = peli;
-                var extension = req.file.originalname.split(".").pop();
+                var extension, foto = "";
 
                 try {
-                    if(fs.accessSync("public/imagenes/films-prox/" + peli.foto)) {
-                        // existe
-                        fs.unlink("public/imagenes/films-prox/" + peli.foto,  (err) => {
-                            if (err) {
-                                console.log("No se pudo eliminar la imagen");
-                            } else {
-                                console.log('imagen eliminada');                                
-                            }
+                    extension = req.file.originalname.split(".").pop();
+                    foto = utilities.convertToSlug(req.body.nombre) + "." + extension;
+
+                    if(peli.foto == "films450.png"){
+                        fs.rename(req.file.path,"public/imagenes/films-prox/" + foto, function (err) {
+                            if (err) return console.error(err);
+                        });
+                    }else{
+                        // Elimino la imagen antes asignada
+                        fs.unlink("public/imagenes/films-prox/" + peli.foto,  (err) => {});
+                        // agrego la nueva imagen que se le va a asignar
+                        fs.rename(req.file.path,"public/imagenes/films-prox/" + foto,function (err) {
+                            if (err) return console.error(err);
                         });
                     }
-                } catch (e) {
-                    console.log('La imagen no existe...');
-                }               
+
+                } catch (error) {
+                    // mantengo el valor de la foto ya registrada
+                    foto = peli.foto;
+                }            
 
                 peli_update.nombre     = typeof req.body.nombre == 'undefined' ? peli.nombre : req.body.nombre;
-                peli_update.foto   = typeof req.file == 'undefined' ? peli.foto : req.body.nombre + "." + extension;
+                peli_update.foto       = foto;
                 peli_update.is_public  = typeof req.body.is_public == 'undefined' ? peli.is_public : req.body.is_public;              
                 
-                fs.rename(req.file.path,"public/imagenes/films-prox/" + req.body.nombre + "." + extension, function (err) {
-					if (err) return console.error(err);
-					console.log("Imagen enviada a la carpeta de imagenes!");
-				});
-
                 peli_update.save().then(function(us){
                     res.status(200).json({
-                        mensaje:"La película " + peli.nombre + " ha sido actualizada exitosamente...",
+                        mensaje:"La película por estrenar " + peli.nombre + " ha sido actualizada exitosamente...",
                         tipo: "success",
                         visible: true
                     });
                 },function(err){
-                    res.status(200).json("Hubo un error al actualizar los datos de la pelicula");
+                    res.status(500).json({
+                        mensaje:"Hubo un error al actualizar los datos de la pelicula por estrenar " + peli.nombre,
+                        tipo: "danger",
+                        visible: true
+                    });
                 });
             }
         });
     })
     .delete(function(req,res){
         Peliculas.findById(req.params.id,function(err,pelicula){
+            if(err){
+                res.status(500).json({
+                    mensaje:"Hubo un error al eliminar los datos de la pelicula " + pelicula.nombre,
+                    tipo: "danger",
+                    visible: true
+                });
+            }
+
             if(!pelicula){
-                res.status(200).json({
+                res.status(404).json({
                     mensaje:"No existe la película que piensas eliminar...",
                     tipo: "danger",
                     visible: true
@@ -88,28 +104,21 @@ router.route('/pelis-prox/:id')
 
                 pelicula_delete.remove().then(function(us){
 
-                    try {
-                        if(fs.accessSync("public/imagenes/films-prox/" + pelicula.foto)) {
-                            // existe
-                            fs.unlink("public/imagenes/films-prox/" + pelicula.foto,  (err) => {
-                                if (err) {
-                                    console.log("No se pudo eliminar la imagen");
-                                } else {
-                                    console.log('imagen eliminada');                                
-                                }
-                            });
-                        }
-                    } catch (e) {
-                        console.log('La imagen no existe...');
+                    if(pelicula.foto != "films450.png"){
+                        fs.unlink("public/imagenes/films-prox/" + pelicula.foto);                        
                     }
                     
                     res.status(200).json({
-                        mensaje:"Han sido eliminado los datos de la película " + pelicula.nombre + " exitosamente...",
+                        mensaje:"Han sido eliminado los datos de la película por estrenar " + pelicula.nombre + " exitosamente...",
                         tipo: "success",
                         visible: true
                     });  
                 },function(err){
-                    res.status(200).json("Hubo un error al eliminar los datos de la película");
+                    res.status(500).json({
+                        mensaje:"Hubo un error al eliminar los datos de la pelicula por estrenar" + pelicula.nombre,
+                        tipo: "danger",
+                        visible: true
+                    });
                 });                
 
             }
@@ -120,14 +129,22 @@ router.route('/pelis-prox')
     .get(function(req,res){
         Peliculas.find({},function (err,pelis) {
             if (err) {
-				res.json(err); 
+				res.json({
+                    mensaje:"Hubo un error al cargar las películas por Estrenar...",
+                    tipo: "danger",
+                    visible: true
+                }); 
 			}else{
                 if(pelis.length){   
-                    console.log("si hay pelis");
-                    res.json({pelis: pelis});                 
+                    res.status(200).json({
+                        mensaje:"Películas cargadas exitosamente...",
+                        tipo: "success",
+                        visible: true,
+                        pelis: pelis
+                    });                 
                 }else{
                     console.log("no hay pelis");
-                    res.json({
+                    res.status(404).json({
                         mensaje:"No hay películas registradas...",
                         tipo: "danger",
                         visible: true,
@@ -139,26 +156,40 @@ router.route('/pelis-prox')
 		});
     })
     .post(upload.single('portada'), function(req,res){
-        var extension = req.file.originalname.split(".").pop();
+        var extension, foto = "";
+
+        try {
+            extension = req.file.originalname.split(".").pop();
+            foto = utilities.convertToSlug(req.body.nombre) + "." + extension;
+
+            fs.rename(req.file.path,"public/imagenes/films-prox/" + foto,function (err) {
+                if (err) return console.error(err);
+            });
+
+        } catch (error) {
+            extension = ".png";
+            foto = "films450" + extension;
+        }
 
         var pelis = new Peliculas({
             nombre: req.body.nombre,
-            foto: req.body.nombre + "." + extension,
+            foto: foto,
             is_public: req.body.is_public
         });
 
         pelis.save().then(function(us){
-            fs.rename(req.file.path,"public/imagenes/films-prox/" + req.body.nombre + "." + extension,function (err) {
-                if (err) return console.error(err);
-                console.log("Succes!");
-                res.status(200).json({
-                    mensaje:"Hemos Registrado los datos de la pelicula " + req.body.nombre + " exitosamente...",
-                    tipo: "success",
-                    visible: true
-                });
+            res.status(200).json({
+                mensaje:"Hemos Registrado los datos de la pelicula " + req.body.nombre + " exitosamente...",
+                tipo: "success",
+                visible: true
             });
         },function(err){
-            res.json(err);
+            res.status(500).json({
+                mensaje: "Hubo un error al guardar los datos de la pelicula " + req.body.nombre,
+                tipo: "danger",
+                err: err,
+                visible: true,
+            });
         });
     });
 
