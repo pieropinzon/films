@@ -26,6 +26,7 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-alpha.6",
+    "compression": "^1.7.1",
     "connect": "^3.6.5",
     "core-js": "^2.4.1",
     "express": "^4.16.1",

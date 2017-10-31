@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-// const connect = require('connect');
+let compression = require('compression');
 
 // Get our API routes
 const film   = require('./server/controllers/filmController');
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // comprimir archivos estaticos con gzip
-// app.use(connect.compress());
+app.use(compression());
 
 //declaracion de la ruta de archivos estaticos
 app.use(express.static(path.join(__dirname, 'public')));
