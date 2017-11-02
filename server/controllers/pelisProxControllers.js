@@ -129,7 +129,7 @@ router.route('/pelis-prox')
     .get(function(req,res){
         Peliculas.find({},function (err,pelis) {
             if (err) {
-				res.json({
+                res.status(500).json({
                     mensaje:"Hubo un error al cargar las películas por Estrenar...",
                     tipo: "danger",
                     visible: true

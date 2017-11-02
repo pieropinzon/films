@@ -684,6 +684,8 @@ var FormPproxComponent = (function () {
                 .getPeliculasId(id)
                 .subscribe(function (pelicula) {
                 _this.pelicula = pelicula;
+                _this.pelisLoading = false;
+                _this.pelisModule = "";
             }, null, function () {
                 _this.pelisLoading = false;
                 _this.pelisModule = "";
@@ -1554,7 +1556,11 @@ var PelisProxComponent = (function () {
             _this.pelisModule = "";
             if (!_this.isPeliculas)
                 _this.alertDatos(peliculas);
-        }, null, function () {
+        }, function (err) {
+            _this.pelisLoading = false;
+            _this.pelisModule = "";
+            _this.alertDatos(err);
+        }, function () {
             _this.pelisLoading = false;
             _this.pelisModule = "";
         });
@@ -1619,8 +1625,10 @@ var _a, _b, _c;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PelisProxService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1630,6 +1638,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1650,12 +1659,14 @@ var PelisProxService = (function () {
     PelisProxService.prototype.getPeliculas = function () {
         return this.http
             .get(this.url, { headers: this.headers })
-            .map(function (res) { return res.json(); });
+            .map(function (res) { return res.json(); })
+            .catch(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(res.json()); });
     };
     PelisProxService.prototype.getPeliculasId = function (peliculaId) {
         return this.http
             .get(this.getPeliculaUrl(peliculaId), { headers: this.headers })
-            .map(function (res) { return res.json(); });
+            .map(function (res) { return res.json(); })
+            .catch(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(res.json()); });
     };
     PelisProxService.prototype.addPelicula = function (pelicula, portada) {
         var form_data = new FormData();
@@ -1666,7 +1677,8 @@ var PelisProxService = (function () {
             form_data.append('portada', portada, portada.name);
         return this.http
             .post(this.url, form_data, { headers: this.headers })
-            .map(function (res) { return res.json(); });
+            .map(function (res) { return res.json(); })
+            .catch(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(res.json()); });
     };
     PelisProxService.prototype.updatePelicula = function (id, pelicula, portada) {
         var form_data = new FormData();
@@ -1677,11 +1689,13 @@ var PelisProxService = (function () {
             form_data.append('portada', portada, portada.name);
         return this.http
             .put(this.getPeliculaUrl(id), form_data, { headers: this.headers })
-            .map(function (res) { return res.json(); });
+            .map(function (res) { return res.json(); })
+            .catch(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(res.json()); });
     };
     PelisProxService.prototype.deletePelicula = function (peliculaId) {
         return this.http.delete(this.getPeliculaUrl(peliculaId), { headers: this.headers })
-            .map(function (res) { return res.json(); });
+            .map(function (res) { return res.json(); })
+            .catch(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(res.json()); });
     };
     PelisProxService.prototype.sendCsv = function (archivo) {
         var form_data = new FormData();
