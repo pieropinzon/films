@@ -63,7 +63,6 @@ app.get('*', (req, res) => {
 
 		let busqueda = peliculasClass.tipoBusqueda("","");
 		peliculasClass.obtenerPeliculas(res, req, "", "", busqueda, page, num_page, num_por_page, count, sinResultados, "Peliculas para descargar gratis en HD");
-
 });
 
 
