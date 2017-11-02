@@ -903,7 +903,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GenerosService = (function () {
     function GenerosService(http) {
         this.http = http;
-        this.url = "//localhost:4000/api/genero"; // url de los servicios en desarrollo
+        this.url = "//159.203.165.2:4000/api/genero"; // url de los servicios en desarrollo
+        // private url = "//localhost:4000/api/genero"; // url de los servicios en desarrollo
         // private url = "//filmsplay.herokuapp.com/api/genero"; // url de los servicios en produccion
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         if (localStorage.getItem('token')) {
@@ -1380,8 +1381,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PeliculasService = (function () {
     function PeliculasService(http) {
         this.http = http;
-        this.url = "//localhost:4000/api/peliculas"; // url local
-        this.urlBase = "//localhost:4000/api";
+        this.url = "//159.203.165.2:4000/api/peliculas"; // url local
+        this.urlBase = "//159.203.165.2:4000/api";
+        // private url = "//localhost:4000/api/peliculas"; // url local
+        // private urlBase = "//localhost:4000/api";
         // private url = "//filmsplay.herokuapp.com/api/peliculas"; // url de los servicios en produccion
         // private urlBase = "//filmsplay.herokuapp.com/api";
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
@@ -1633,8 +1636,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PelisProxService = (function () {
     function PelisProxService(http) {
         this.http = http;
-        this.url = "//localhost:4000/api/pelis-prox"; // url local
-        this.urlBase = "//localhost:4000/api";
+        this.url = "//159.203.165.2:4000/api/pelis-prox"; // url local
+        this.urlBase = "//159.203.165.2:4000/api";
+        // private url = "//localhost:4000/api/pelis-prox"; // url local
+        // private urlBase = "//localhost:4000/api";
         // private url = "//filmsplay.herokuapp.com/api/pelis-prox"; // url de los servicios en produccion
         // private urlBase = "//filmsplay.herokuapp.com/api";
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
@@ -2026,7 +2031,8 @@ var AuthService = (function () {
         this.http = http;
         this.router = router;
         this.url = ""; // url de los servicios en desarrollo
-        this.url = "//localhost:4000/api/user/";
+        this.url = "//159.203.165.2:4000/api/user/";
+        //   this.url = "//localhost:4000/api/user/";
         //   this.url = "//filmsplay.herokuapp.com/api/user/";
     }
     AuthService.prototype.login = function (user) {
